@@ -11,7 +11,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home() {
-        return "hello ci/cd demo";
+        return "Welcome to ci/cd demo";
     }
 
     @GetMapping("/add/{valueOne}/{valueTwo}")
