@@ -5,13 +5,13 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                mvn clean compile
+                //mvn clean compile
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-                mvn test
+                //mvn test
             }
         }
         stage('Publish Tests') {
@@ -22,7 +22,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying..'
-                mvn package -Dmaven.test.skip=true && java -jar target/ci-cd-demo-SNAPSHOT.jar
+                //mvn package -Dmaven.test.skip=true && java -jar target/ci-cd-demo-SNAPSHOT.jar
             }
         }
     }
