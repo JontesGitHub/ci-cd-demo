@@ -19,16 +19,16 @@ pipeline {
                 echo 'Publishing tests..'
             }
         }
-        stage('Save Artifact (.jar)') {
-            steps {
-                echo 'Saving artifacts..'
-                archiveArtifacts 'target/*.jar'
-            }
-        }
         stage('Deploy') {
             steps {
                 echo 'Deploying..'
                 //mvn package -Dmaven.test.skip=true && java -jar target/ci-cd-demo-SNAPSHOT.jar
+            }
+        }
+        stage('Save Artifact (.jar)') {
+            steps {
+                echo 'Saving artifacts..'
+                archiveArtifacts artifacts 'target/*.jar'
             }
         }
     }
