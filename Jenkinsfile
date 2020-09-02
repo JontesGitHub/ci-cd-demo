@@ -1,25 +1,25 @@
 pipeline {
-    agent {
-        docker { image 'maven:3.6.3-slim' }
-    }
-
+    //agent {
+      //  docker { image 'maven:3.6.3-slim' }
+    //}
+    agent
     stages {
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh 'mvn clean compile'
+                //sh 'mvn clean compile'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-                sh 'mvn test'
+                //sh 'mvn test'
             }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
+            //post {
+               // always {
+               //     junit 'target/surefire-reports/*.xml'
+               // }
+           // }
         }
         stage('Deploy') {
             steps {
@@ -29,7 +29,7 @@ pipeline {
             post {
                 always {
                     echo 'Saving artifacts..'
-                    archiveArtifacts artifacts: 'target/*.jar', onlyIfSuccessful: true
+                    //archiveArtifacts artifacts: 'target/*.jar', onlyIfSuccessful: true
                 }
             }
         }
