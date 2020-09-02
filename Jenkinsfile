@@ -25,10 +25,10 @@ pipeline {
                 //mvn package -Dmaven.test.skip=true && java -jar target/ci-cd-demo-SNAPSHOT.jar
             }
         }
-        stage('Save Artifact (.jar)') {
-            steps {
+        post {
+            always {
                 echo 'Saving artifacts..'
-                archiveArtifacts artifacts 'target/*.jar'
+                archiveArtifacts artifacts: 'target/*.jar', onlyIfSuccessful: true
             }
         }
     }
