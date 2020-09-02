@@ -8,6 +8,8 @@ pipeline {
             steps {
                 echo 'Building..'
                 //sh 'mvn clean compile'
+                sh 'pwd'
+                sh 'ls'
             }
         }
         stage('Test') {
