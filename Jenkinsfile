@@ -5,13 +5,13 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                mvn clean compile
+                //mvn clean compile
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-                mvn test
+                //mvn test
             }
         }
         stage('Publish Tests') {
