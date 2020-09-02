@@ -16,7 +16,13 @@ pipeline {
         }
         stage('Publish Tests') {
             steps{
-                echo 'publishing tests..'
+                echo 'Publishing tests..'
+            }
+        }
+        stage('Save Artifact (.jar)') {
+            steps {
+                echo 'Saving artifacts..'
+                archiveArtifacts 'target/*.jar'
             }
         }
         stage('Deploy') {
