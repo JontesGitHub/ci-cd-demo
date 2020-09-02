@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.mock.web.MockHttpServletResponse;
@@ -25,6 +26,9 @@ public class HomeControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @Value("${welcome.message}")
+    private String welcomeMessage;
+
     @DisplayName("should return welcome message on /")
     @Test
     public void homeEndpoint() throws Exception {
@@ -33,7 +37,7 @@ public class HomeControllerTest {
 
         //then
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-        assertThat(response.getContentAsString()).isEqualTo("Welcome to ci/cd demo");
+        assertThat(response.getContentAsString()).isEqualTo(welcomeMessage);
     }
 
     @DisplayName("should return the sum of two path variables on /add")

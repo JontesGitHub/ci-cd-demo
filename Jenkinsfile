@@ -25,6 +25,7 @@ pipeline {
             steps {
                 echo 'Deploying..'
                 sh 'mvn spring-boot:run'
+
             }
             post {
                 always {
