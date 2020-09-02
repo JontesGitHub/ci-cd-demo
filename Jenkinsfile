@@ -2,7 +2,7 @@ pipeline {
     //agent {
       //  docker { image 'maven:3.6.3-slim' }
     //}
-    agent
+    agent any
     stages {
         stage('Build') {
             steps {
