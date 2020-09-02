@@ -7,13 +7,13 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                mvn clean compile
+                sh 'mvn clean compile'
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-                mvn test
+                sh 'mvn test'
             }
             post {
                 always {
@@ -24,12 +24,12 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying..'
-                mvn package -Dmaven.test.skip=true && java -jar target/ci-cd-demo-SNAPSHOT.jar
+                sh 'mvn package -Dmaven.test.skip=true && java -jar target/ci-cd-demo-SNAPSHOT.jar'
             }
             post {
                 always {
                     echo 'Saving artifacts..'
-                    archiveArtifacts artifacts: '**/*.jar', onlyIfSuccessful: true
+                    archiveArtifacts artifacts: 'target/*.jar', onlyIfSuccessful: true
                 }
             }
         }
