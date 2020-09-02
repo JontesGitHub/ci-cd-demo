@@ -8,9 +8,7 @@ pipeline {
             steps {
                 echo 'Building..'
                 //sh 'mvn clean compile'
-                sh 'cd target'
-                sh 'pwd'
-                sh 'ls'
+                sh 'cd target && pwd && ls'
             }
         }
         stage('Test') {
