@@ -15,11 +15,11 @@ pipeline {
                 echo 'Testing..'
                 sh 'mvn test'
             }
-            //post {
-               // always {
-               //     junit 'target/surefire-reports/*.xml'
-               // }
-           // }
+            post {
+                always {
+                    archiveArtifacts artifacts: 'target/site/jacoco/index.html'
+                }
+            }
         }
         stage('Deploy') {
             steps {
