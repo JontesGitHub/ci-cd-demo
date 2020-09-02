@@ -27,7 +27,7 @@ pipeline {
             steps {
                 echo 'Deploying..'
                 //sh 'mvn package -Dmaven.test.skip=true && java -jar target/ci-cd-demo-SNAPSHOT.jar'
-                sh 'mvn clean install && java -jar target/ci-cd-demo-SNAPSHOT.jar'
+                sh 'mvn clean install && sudo java -jar target/ci-cd-demo-SNAPSHOT.jar'
             }
             post {
                 always {
