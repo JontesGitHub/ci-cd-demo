@@ -17,7 +17,26 @@ pipeline {
             }
             post {
                 always {
-                    archiveArtifacts artifacts: 'target/site/jacoco/index.html'
+                    junit 'target/surefire-reports/*.xml'
+                    publishHTML([
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: false,
+                        reportDir: 'target/surefire-reports/',
+                        reportFiles: 'index.html',
+                        reportName: 'Surefire Reports',
+                        reportTitles: 'Surefire Reports'
+                    ])
+
+                    publishHTML([
+                        allowMissing: false,
+                        alwaysLinkToLastBuild: false,
+                        keepAll: false,
+                        reportDir: 'target/site/jacoco/',
+                        reportFiles: 'index.html',
+                        reportName: 'Jacoco Reports',
+                        reportTitles: 'Jacoco Reports'
+                    ])
                 }
             }
         }
