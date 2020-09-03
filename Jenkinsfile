@@ -4,25 +4,24 @@ pipeline {
     //}
     agent any
     stages {
-        stage('Build') {
+        stage('Build and Test') {
             steps {
                 echo 'Building..'
-                sh 'mvn clean compile'
+                sh 'mvn clean install'
             }
         }
-        stage('Test') {
+        stage('Test Reports') {
             steps {
-                echo 'Testing..'
-                sh 'mvn test'
+                echo 'Publishing Tests Reports..'
+                sh 'mvn surefire-report:report-only'
             }
             post {
                 always {
-                    junit 'target/surefire-reports/*.xml'
                     publishHTML([
                         allowMissing: false,
                         alwaysLinkToLastBuild: false,
                         keepAll: false,
-                        reportDir: 'target/surefire-reports/',
+                        reportDir: 'target/site/surefire-reports/',
                         reportFiles: 'index.html',
                         reportName: 'Surefire Reports',
                         reportTitles: 'Surefire Reports'
@@ -37,6 +36,18 @@ pipeline {
                         reportName: 'Jacoco Reports',
                         reportTitles: 'Jacoco Reports'
                     ])
+
+                    archiveArtifacts artifacts: 'target/*.jar', onlyIfSuccessful: true
+                }
+            }
+        }
+        stage('Save .jar file') {
+            steps {
+                echo 'Saving Archives..'
+            }
+            post {
+                always {
+                    archiveArtifacts artifacts: 'target/*.jar'
                 }
             }
         }
@@ -44,13 +55,6 @@ pipeline {
             steps {
                 echo 'Deploying..'
                 sh 'mvn spring-boot:run'
-
-            }
-            post {
-                always {
-                    echo 'Saving artifacts..'
-                    archiveArtifacts artifacts: 'target/*.jar', onlyIfSuccessful: true
-                }
             }
         }
     }
