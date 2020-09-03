@@ -21,8 +21,8 @@ pipeline {
                         allowMissing: false,
                         alwaysLinkToLastBuild: false,
                         keepAll: false,
-                        reportDir: 'target/site/surefire-reports/',
-                        reportFiles: 'index.html',
+                        reportDir: 'target/site/',
+                        reportFiles: 'surefire-report.html',
                         reportName: 'Surefire Reports',
                         reportTitles: 'Surefire Reports'
                     ])
@@ -36,12 +36,10 @@ pipeline {
                         reportName: 'Jacoco Reports',
                         reportTitles: 'Jacoco Reports'
                     ])
-
-                    archiveArtifacts artifacts: 'target/*.jar', onlyIfSuccessful: true
                 }
             }
         }
-        stage('Save .jar file') {
+        stage('Save .jar file (run with: java -jar JARFILE.jar in terminal') {
             steps {
                 echo 'Saving Archives..'
             }
@@ -49,12 +47,6 @@ pipeline {
                 always {
                     archiveArtifacts artifacts: 'target/*.jar'
                 }
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying..'
-                sh 'mvn spring-boot:run'
             }
         }
     }
