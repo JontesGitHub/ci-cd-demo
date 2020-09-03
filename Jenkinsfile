@@ -39,7 +39,7 @@ pipeline {
                 }
             }
         }
-        stage('Save .jar file (run with: java -jar JARFILE.jar in terminal') {
+        stage('Save jar.\nDownload .jar file (run with: java -jar JARFILE.jar in terminal)') {
             steps {
                 echo 'Saving Archives..'
             }
