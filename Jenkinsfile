@@ -1,8 +1,7 @@
 pipeline {
-    //agent {
-      //  docker { image 'maven:3.6.3-slim' }
-    //}
-    agent any
+    agent { // none any
+        docker { image 'maven:3.6.3-slim' }
+    }
     stages {
         stage('Build and Test') {
             steps {
